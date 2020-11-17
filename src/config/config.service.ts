@@ -26,7 +26,6 @@ export class ConfigService {
           USERNAME: process.env.USERNAME,
           PASSWORD: process.env.PASSWORD,
           DATABASE: process.env.DATABASE,
-          JWT_SECRET: process.env.JWT_SECRET,
         };
       }
     }

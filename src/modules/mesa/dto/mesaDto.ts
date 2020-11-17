@@ -1,8 +1,6 @@
-export class MesaDto {
-  mesa: tableDto[];
-}
-
-export class tableDto {
+export class MesaDto  {
+  id:number;
   name: string;
   capacity: number;
+  mesaE:number;
 }
