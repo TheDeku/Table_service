@@ -3,21 +3,26 @@ import { BadRequestException, Injectable, NotFoundException } from '@nestjs/comm
 import { plainToClass } from 'class-transformer';
 
 import { MesaDto } from './dto/mesaDto';
-import { Mesa } from './mesa.entity';
-import { MesaRepository } from './mesa.repository';
+
+import { MesaRepository, MesaStateRepository } from './mesa.repository';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Mesa } from './entities/Mesa.entity';
+
 
 @Injectable()
 export class MesaService {
   constructor(
     @InjectRepository(MesaRepository)
     private readonly _mesaRepository: MesaRepository,
+    @InjectRepository(MesaStateRepository)
+    private readonly _mesaStateRepository: MesaStateRepository,
   ) {}
 
   async create(mesaDto: MesaDto) {
     let mesa = new Mesa();
-    mesa.name = mesaDto.name;
-    mesa.capacity = mesaDto.capacity;
+    mesa.nombre = mesaDto.name;
+    mesa.capacidad = mesaDto.capacity;
+    mesa.mesaeId = 2;
     return await this._mesaRepository.save(mesa);
   }
 
@@ -58,9 +63,14 @@ export class MesaService {
   async udpTable(table:MesaDto){
     let mesa = new Mesa();
     mesa.id = table.id;
-    mesa.name = table.name;
-    mesa.capacity = table.capacity;
+    mesa.nombre = table.name;
+    mesa.capacidad = table.capacity;
     mesa.mesaeId = table.mesaE;
     return this._mesaRepository.save(mesa);
+  }
+
+  async getTableStates(){
+    return this._mesaStateRepository.find();
+  
   }
 }

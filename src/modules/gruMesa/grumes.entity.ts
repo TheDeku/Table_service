@@ -1,5 +1,6 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { Mesa } from '../mesa/mesa.entity';
+
+
 
 @Entity("gru_mes", { schema: "portafolio" })
 export class GruMes {
@@ -17,17 +18,5 @@ export class GruMes {
 
   @Column("varchar", { name: "TOKEN", nullable: true, length: 30 })
   token: string | null;
-
-  @ManyToMany(type => Mesa, mesa => mesa.groups, { eager: true })
-  @JoinTable({ name: 'gmes_mes' ,joinColumn: {
-          name: "GRU_MESA_ID",
-          referencedColumnName: "id"
-      },
-      inverseJoinColumn: {
-          name: "MESA_ID",
-          referencedColumnName: "id"
-      }})
-  mesas: Mesa[];
-
 
 }

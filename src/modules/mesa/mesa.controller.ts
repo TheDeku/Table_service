@@ -73,4 +73,11 @@ export class MesaController {
   async udpTable(@Body() mesaDto: MesaDto){
     return this._mesaService.udpTable(mesaDto)
   }
+
+  @Post("states")
+  @Roles('ADMIN','GARZON')
+  @UseGuards(new AuthGuard(), RoleGuard)
+  async getStates(){
+    return this._mesaService.getTableStates();
+  }
 }
