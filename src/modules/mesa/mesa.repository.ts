@@ -1,6 +1,6 @@
 import { EntityRepository, Repository } from "typeorm";
-import { Mesa } from "./entities/mesa.entity";
 import { Mesae } from "./entities/Mesae.entity";
+import { Mesa } from './entities/Mesa.entity';
 
 
 

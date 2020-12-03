@@ -19,8 +19,10 @@ async function bootstrap() {
   await app.listen(AppModule.port);
   // registerWithEureka("auth", parseInt(AppModule.port));
 
-
-  registerWithEureka("table", parseInt(AppModule.port.toString()));
+  if (process.env.NODE_ENV==="production") {
+    registerWithEureka("table", parseInt(AppModule.port.toString()));
+  }
+ 
 
   logger.verbose(`Version: ${environment.appVersion}`)
   logger.verbose(`Description: ${environment.appDescription}`)

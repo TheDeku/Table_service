@@ -52,7 +52,7 @@ export class MesaController {
   }
 
   @Get()
-  @Roles('ADMIN')
+  @Roles('ADMIN','CAJERO','GARZON')
   @UseGuards(new AuthGuard(), RoleGuard)
   async getTables(): Promise<MesaDto[]> {
     const tables = await this._mesaService.getAll();
@@ -75,9 +75,16 @@ export class MesaController {
   }
 
   @Post("states")
-  @Roles('ADMIN','GARZON')
-  @UseGuards(new AuthGuard(), RoleGuard)
+  //@Roles('ADMIN','GARZON')
+  //@UseGuards(new AuthGuard(), RoleGuard)
   async getStates(){
     return this._mesaService.getTableStates();
+  }
+
+  @Post("states/:id")
+  @Roles('ADMIN','GARZON')
+  @UseGuards(new AuthGuard(), RoleGuard)
+  async getByState(@Param('id', ParseIntPipe) id: number){
+    return this._mesaService.getTableByStates(id);
   }
 }

@@ -20,8 +20,8 @@ export class MesaService {
 
   async create(mesaDto: MesaDto) {
     let mesa = new Mesa();
-    mesa.nombre = mesaDto.name;
-    mesa.capacidad = mesaDto.capacity;
+    mesa.name = mesaDto.name;
+    mesa.capacity = mesaDto.capacity;
     mesa.mesaeId = 2;
     return await this._mesaRepository.save(mesa);
   }
@@ -63,14 +63,19 @@ export class MesaService {
   async udpTable(table:MesaDto){
     let mesa = new Mesa();
     mesa.id = table.id;
-    mesa.nombre = table.name;
-    mesa.capacidad = table.capacity;
+    mesa.name = table.name;
+    mesa.capacity = table.capacity;
     mesa.mesaeId = table.mesaE;
     return this._mesaRepository.save(mesa);
   }
 
   async getTableStates(){
     return this._mesaStateRepository.find();
+  
+  }
+
+  async getTableByStates(id){
+    return this._mesaRepository.find({where:{mesaeId:id}});
   
   }
 }

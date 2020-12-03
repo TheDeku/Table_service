@@ -24,14 +24,16 @@ export class AuthGuard implements CanActivate {
 
   async validateToken(auth: string) {
     const config = new ConfigService();
+    console.log(auth);
     if (auth.split(' ')[0] !== 'Bearer') {
       throw new HttpException('Invalid token', HttpStatus.UNAUTHORIZED);
     }
     const token = auth.split(' ')[1];
+    console.log(token);
     try {
       console.log(env.JWT_SECRET);
-      const decoded: any = await jwt.verify(token, env.JWT_SECRET);
-      console.log(decoded)
+      const decoded: any = await jwt.verify(token, config.get(Configuration.JWT_SECRET));
+      console.log(decoded);
       return decoded;
     } catch (err) {
       console.log(err);

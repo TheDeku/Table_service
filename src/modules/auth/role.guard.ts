@@ -30,7 +30,7 @@ export class RoleGuard implements CanActivate {
       }
     }
     console.log(roles);
-    console.log(user + ' ' + user.roles)
+    console.log(JSON.stringify(user) + ' ' + user.roles + '' + hasRole)
 
     return user && user.roles && hasRole;
   }
